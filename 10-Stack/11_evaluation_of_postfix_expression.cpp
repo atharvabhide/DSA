@@ -5,45 +5,42 @@ class Solution
     int evaluatePostfix(string s)
     {
         stack<int> mystack;
+        
         for (int i = 0; i < s.size(); i++)
         {
-            if (s[i] <= '9' && s[i] >= '0')
+            if (s[i] != '*' and s[i] != '/' and s[i] != '+' and s[i] != '-')
             {
-                mystack.push(int(s[i])-'0');
+                int x = s[i]-'0';
+                mystack.push(x);
             }
-            else if (s[i] == '+')
+            
+            else
             {
                 int op1 = mystack.top();
                 mystack.pop();
                 int op2 = mystack.top();
                 mystack.pop();
-                mystack.push(op2+op1);
-            }
-            else if (s[i] == '-')
-            {
-                int op1 = mystack.top();
-                mystack.pop();
-                int op2 = mystack.top();
-                mystack.pop();
-                mystack.push(op2-op1);
-            }
-            else if (s[i] == '*')
-            {
-                int op1 = mystack.top();
-                mystack.pop();
-                int op2 = mystack.top();
-                mystack.pop();
-                mystack.push(op2*op1);
-            }
-            else if (s[i] == '/')
-            {
-                int op1 = mystack.top();
-                mystack.pop();
-                int op2 = mystack.top();
-                mystack.pop();
-                mystack.push(op2/op1);
+                
+                switch (s[i])
+                {
+                    case '*':
+                        mystack.push(op2*op1);
+                        break;
+                    case '/':
+                        mystack.push(op2/op1);
+                        break;
+                    case '+':
+                        mystack.push(op2+op1);
+                        break;
+                    case '-':
+                        mystack.push(op2-op1);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
+        
         return mystack.top();
     }
 };
