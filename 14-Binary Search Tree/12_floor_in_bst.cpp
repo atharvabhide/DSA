@@ -1,20 +1,31 @@
-void traversal(Node* root, int key, int &res)
+void search(Node* root, Node* x, int &res)
 {
+    // brute force - use a simple traversal
+    // O(h) time solution
     if (root == NULL)
     {
         return;
     }
-    traversal(root->left, key, res);
-    if (root->data == key or root->data < key)
+    if (root->data == x->data)
     {
-        res = max(res, root->data);
+        res = root->data;
+        return;
     }
-    traversal(root->right, key, res);
+    else if (root->data < x->data)
+    {
+        res = root->data;
+        search(root->right, x, res);
+    }
+    else
+    {
+        search(root->left, x, res);
+    }
 }
 
 int floor(Node* root, int key) 
 {
+    Node* x = newNode(key);
     int res = -1;
-    traversal(root, key, res);
+    search(root, x, res);
     return res;
 }
