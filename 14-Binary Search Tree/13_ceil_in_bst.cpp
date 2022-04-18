@@ -1,22 +1,32 @@
-// Function to return the ceil of given number in BST.
-void traversal(Node* root, int key, int &res)
+void search(Node* root, Node* x, int &res)
 {
+    // O(h) time solution
+    // brute force - use simple traversal
     if (root == NULL)
     {
         return;
     }
-    traversal(root->left, key, res);
-    if (root->data == key or root->data > key)
+    if (root->data == x->data)
     {
-        res = min(res, root->data);
+        res = root->data;
+        return;
     }
-    traversal(root->right, key, res);
+    else if (root->data < x->data)
+    {
+        search(root->right, x, res);
+    }
+    else
+    {
+        res = root->data;
+        search(root->left, x, res);
+    }
 }
 
-int findCeil(Node* root, int key) 
+int findCeil(Node* root, int input) 
 {
-    int res = INT_MAX;
-    traversal(root, key, res);
-    if (res == INT_MAX) return -1;
+    if (root == NULL) return -1;
+    int res = -1;
+    Node* x = newNode(input);
+    search(root, x, res);
     return res;
 }
