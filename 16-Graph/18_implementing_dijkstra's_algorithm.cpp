@@ -13,11 +13,11 @@ class Solution
         {
             int u = -1;
             // picking minimum weight vertex from dist array
-            for (int i = 0; i < V; i++)
+            for (int j = 0; j < V; i++)
             {
-                if (fixed[i] == false and (u == -1 || dist[i] < dist[u]))
+                if (fixed[j] == false and (u == -1 || dist[j] < dist[u]))
                 {
-                    u = i;
+                    u = j;
                 }
             }
             
