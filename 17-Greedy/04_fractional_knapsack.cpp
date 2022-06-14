@@ -20,6 +20,7 @@ class Solution
     
     double fractionalKnapsack(int W, Item arr[], int n)
     {
+        // sort the items in decreasing order of value/weight ratio
         sort(arr, arr+n, cmp);
         double result = 0.0;
         for (int i = 0; i < n; i++)
